@@ -2,9 +2,9 @@
 # python nn_iris.py
 
 # import the necessary packages
-from keras.models import Sequential
-from keras.layers.core import Dense
-from keras.optimizers import SGD
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.optimizers import SGD
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report

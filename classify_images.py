@@ -3,6 +3,7 @@
 # python classify_images.py --model svm
 
 # import the necessary packages
+import cv2
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.linear_model import LogisticRegression
@@ -13,17 +14,17 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
-from PIL import Image
+# from PIL import Image
 from imutils import paths
 import numpy as np
 import argparse
 import os
 
-def extract_color_stats(image):
+def extract_color_stats(cv2_image):
 	# split the input image into its respective RGB color channels
 	# and then create a feature vector with 6 values: the mean and
 	# standard deviation for each of the 3 channels, respectively
-	(R, G, B) = image.split()
+	(B, G, R) = cv2.split(cv2_image)
 	features = [np.mean(R), np.mean(G), np.mean(B), np.std(R),
 		np.std(G), np.std(B)]
 
@@ -62,7 +63,8 @@ labels = []
 for imagePath in imagePaths:
 	# load the input image from disk, compute color channel
 	# statistics, and then update our data list
-	image = Image.open(imagePath)
+	# image = Image.open(imagePath)
+	image = cv2.imread(imagePath)
 	features = extract_color_stats(image)
 	data.append(features)
 

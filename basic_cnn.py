@@ -2,21 +2,23 @@
 # python basic_cnn.py
 
 # import the necessary packages
-from keras.models import Sequential
-from keras.layers.convolutional import Conv2D
-from keras.layers.convolutional import MaxPooling2D
-from keras.layers.core import Activation
-from keras.layers.core import Flatten
-from keras.layers.core import Dense
-from keras.optimizers import Adam
+import imutils
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv2D
+from tensorflow.keras.layers import MaxPooling2D
+from tensorflow.keras.layers import Activation
+from tensorflow.keras.layers import Flatten
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.optimizers import Adam
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
-from PIL import Image
+# from PIL import Image
 from imutils import paths
 import numpy as np
 import argparse
 import os
+import cv2
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -36,8 +38,12 @@ for imagePath in imagePaths:
 	# load the input image from disk, resize it to 32x32 pixels, scale
 	# the pixel intensities to the range [0, 1], and then update our
 	# images list
-	image = Image.open(imagePath)
-	image = np.array(image.resize((32, 32))) / 255.0
+
+	# image = Image.open(imagePath)
+	image = cv2.imread(imagePath)
+	# image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+	# image = np.array(image.resize((32, 32))) / 255.0
+	image = np.array(imutils.resize(image, 32,32))/255.0
 	data.append(image)
 
 	# extract the class label from the file path and update the

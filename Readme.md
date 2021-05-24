@@ -38,3 +38,12 @@ To see all of the required libraries see `setup.py`.
 pip install -r requirements.txt
 ```
 
+## Change List
+
+* convert to using Tensorflow 2
+
+* Remove the dependency on PIL (pillow) and used OpenCV for image reading, spliting
+
+* added setup.py to pin lib versions
+
+* 
