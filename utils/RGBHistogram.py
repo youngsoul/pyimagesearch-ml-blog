@@ -22,12 +22,13 @@ class RGBHistogram:
     def __init__(self, bins):
         self.bins = bins
 
-    def get_features(self, imagePath):
+    def get_features(self, imagePath, color_stats_only=False):
         img = cv2.imread(imagePath)
         features = []
         if img is not None:
             features.extend(self.extract_color_stats(img))
-            features.extend(self.describe(img).tolist())
+            if not color_stats_only:
+                features.extend(self.describe(img).tolist())
 
         return features
 

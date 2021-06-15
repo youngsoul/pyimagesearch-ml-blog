@@ -9,13 +9,14 @@ import pandas as pd
 
 from utils.RGBHistogram import RGBHistogram
 
-def get_image_features(img_path):
+def get_image_features(img_path, color_stats_only=False, include_image_name=False):
     rgbHisto = RGBHistogram([8, 8, 8])
-    features = rgbHisto.get_features(img_path)
+    features = rgbHisto.get_features(img_path, color_stats_only=color_stats_only)
 
     img_name = img_path.split("/")[-1]
 
-    features.insert(0, img_name)
+    if include_image_name:
+        features.insert(0, img_name)
     return features
 
 def plot_rgb_histogram(img_path, setup_figure=True):
